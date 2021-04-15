@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install Tox
-        run: /usr/bin/python3 -m pip install tox
+        run: pip3 install tox
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
         with:
