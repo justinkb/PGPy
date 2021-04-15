@@ -10,6 +10,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: Install Tox
+        run: pip3 install tox
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
         with:
@@ -18,7 +20,7 @@ jobs:
         run: |
           sed -i -e 's/^/#/' tests/gnupghome/gpg-agent.conf
           if [ "$(uname)" = "Darwin" ]; then ./install_dependencies.osx.sh; else ./install_dependencies.linux.sh; fi
-          pip install tox 'PyYAML==5.2; python_version == "3.4"'
+          pip install 'PyYAML==5.2; python_version == "3.4"'
       - name: Run Tox
         run: ./tox.sh -e py
 
