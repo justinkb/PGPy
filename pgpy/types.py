@@ -657,13 +657,8 @@ class FlagEnumMeta(EnumMeta):
         return self & other
 
 
-if six.PY2:
-    class FlagEnum(IntEnum):
-        __metaclass__ = FlagEnumMeta
-
-else:
-    namespace = FlagEnumMeta.__prepare__('FlagEnum', (IntEnum,))
-    FlagEnum = FlagEnumMeta('FlagEnum', (IntEnum,), namespace)
+class FlagEnum(six.with_metaclass(FlagEnumMeta, IntEnum)):
+    pass
 
 
 class Fingerprint(str):
